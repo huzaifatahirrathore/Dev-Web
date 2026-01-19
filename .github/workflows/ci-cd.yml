@@ -231,14 +231,19 @@ jobs:
               exit 1
             fi
             
-            # Install docker-compose if not present
-            if ! command -v docker-compose &> /dev/null; then
-              echo "📦 Installing docker-compose..."
-              sudo curl -L "https://github.com/docker/compose/releases/latest/download/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
-              sudo chmod +x /usr/local/bin/docker-compose
-            else
-              echo "✅ docker-compose already installed"
-            fi
+            # Install latest Docker Compose
+            echo "📦 Installing latest Docker Compose..."
+            DOCKER_COMPOSE_LATEST=$(curl -s https://api.github.com/repos/docker/compose/releases/latest | grep browser_download_url | grep $(uname -s)-$(uname -m) | cut -d '"' -f 4)
+            sudo curl -L "$DOCKER_COMPOSE_LATEST" -o /usr/local/bin/docker-compose
+            sudo chmod +x /usr/local/bin/docker-compose
+            docker-compose version
+              # Install latest Docker Buildx
+            echo "📦 Installing latest Docker Buildx..."
+            BUILDX_LATEST=$(curl -s https://api.github.com/repos/docker/buildx/releases/latest | grep browser_download_url | grep linux-$(uname -m) | cut -d '"' -f 4)
+            sudo mkdir -p /usr/lib/docker/cli-plugins
+            sudo curl -L "$BUILDX_LATEST" -o /usr/lib/docker/cli-plugins/docker-buildx
+            sudo chmod +x /usr/lib/docker/cli-plugins/docker-buildx
+            docker buildx version
             
             # Start Docker service
             echo "🐳 Starting Docker service..."
