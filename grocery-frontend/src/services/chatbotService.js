@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const CHATBOT_API_URL = 'http://127.0.0.1:8001';
+const CHATBOT_API_URL = 'http://0.0.0.0:8001';
 
 export const chatbotService = {
   sendMessage: async (query, userId, accessToken) => {

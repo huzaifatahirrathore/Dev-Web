@@ -11,7 +11,7 @@ services:
       - ./grocery_backend:/app
     networks:
       - grocery_network
-    command: uvicorn main:app --host 0.0.0.0 --port 8000 --reload
+    command: python main.py
 
   # Chatbot Service (FastAPI with AI)
   chatbot:

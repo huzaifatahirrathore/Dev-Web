@@ -8,7 +8,7 @@ import os
 import requests
 import json
 
-CHATBOT_URL = "http://127.0.0.1:8001"
+CHATBOT_URL = "http://0.0.0.0:8001"
 
 def test_health():
     """Test if the chatbot service is running"""

@@ -19,8 +19,8 @@ from langchain_core.documents import Document
 load_dotenv()
 
 OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
-PRODUCT_API_URL = os.getenv("PRODUCT_API_URL", "http://127.0.0.1:8000/products")
-BACKEND_API_URL = os.getenv("BACKEND_API_URL", "http://127.0.0.1:8000")
+PRODUCT_API_URL = os.getenv("PRODUCT_API_URL", "http://0.0.0.0:8000/products")
+BACKEND_API_URL = os.getenv("BACKEND_API_URL", "http://0.0.0.0:8000")
 
 if not OPENAI_API_KEY:
     raise RuntimeError("OPENAI_API_KEY missing")
@@ -857,7 +857,7 @@ if __name__ == "__main__":
     import uvicorn
     uvicorn.run(
         "chatbot:app",
-        host="127.0.0.1",
+        host="0.0.0.0",
         port=8001,
         reload=True
     )
